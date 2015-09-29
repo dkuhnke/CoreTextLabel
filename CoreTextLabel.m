@@ -542,7 +542,7 @@ NSString * CoreTextLabelBlockKeyLinkPressed = @"CoreTextLabelBlockKeyLinkPressed
         CTFrameGetLineOrigins(frame, CFRangeMake(0, count), origins); // Fill origins[] buffer.
 
         // Draw every line but the last one (in last column)
-        NSUInteger total = (column == pathCount-1) ? count-1 : count;
+        NSInteger total = (column == pathCount-1) ? count-1 : count;
         for (CFIndex i = 0; i < total; i++)
         {
             CGPoint point = CGPointMake(origins[i].x + columnFrame.origin.x, origins[i].y);
@@ -552,7 +552,7 @@ NSString * CoreTextLabelBlockKeyLinkPressed = @"CoreTextLabelBlockKeyLinkPressed
         }
 
         // Draw last (truncated) line for last column
-        if (column == pathCount-1 && total < count)
+        if (column == pathCount-1 && total > 0 && total < count)
         {
             // Truncate the last line before drawing it
             CGPoint lastOrigin = origins[count-1];
